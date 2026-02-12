@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#1a5632"/>
+  <!-- Water ripples -->
+  <ellipse cx="256" cy="360" rx="160" ry="30" fill="#4a9e6e" opacity="0.5"/>
+  <ellipse cx="256" cy="340" rx="120" ry="22" fill="#4a9e6e" opacity="0.3"/>
+  <!-- Reed/grass -->
+  <path d="M180 360 Q180 280 160 200 Q180 260 185 360Z" fill="#2d7a4f"/>
+  <path d="M200 360 Q200 250 210 170 Q220 240 205 360Z" fill="#4a9e6e"/>
+  <path d="M320 360 Q320 270 340 190 Q320 260 325 360Z" fill="#2d7a4f"/>
+  <path d="M340 360 Q340 260 330 180 Q350 250 345 360Z" fill="#4a9e6e"/>
+  <!-- Bird silhouette -->
+  <path d="M180 220 Q220 180 256 200 Q292 180 332 220 Q310 210 290 215 Q270 190 256 200 Q242 190 222 215 Q202 210 180 220Z" fill="white"/>
+  <!-- Smaller bird -->
+  <path d="M280 260 Q300 245 316 255 Q308 250 300 252 Q292 245 280 260Z" fill="white" opacity="0.7"/>
+  <!-- Text -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white">HWCA</text>
+</svg>

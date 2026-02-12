@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a5632">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Hunter Wetlands Centre visitor guide - walks, wildlife, activities and more">
+  <title>Hunter Wetlands Centre - Visitor Guide</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Splash / Loading -->
+  <div id="splash" class="splash">
+    <div class="splash-content">
+      <div class="splash-icon">🪶</div>
+      <h1>Hunter Wetlands Centre</h1>
+      <p>Visitor Guide</p>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div id="app" class="app hidden">
+
+    <!-- Header -->
+    <header class="app-header">
+      <button id="btn-back" class="header-btn back-btn hidden" aria-label="Go back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 id="header-title" class="header-title">Hunter Wetlands</h1>
+      <div class="header-spacer"></div>
+    </header>
+
+    <!-- Page Container -->
+    <main id="page-container" class="page-container">
+
+      <!-- HOME PAGE -->
+      <section id="page-home" class="page active">
+        <div class="hero">
+          <div class="hero-overlay">
+            <h2>Welcome to<br>Hunter Wetlands Centre</h2>
+            <p class="hero-subtitle">45 hectares of internationally significant wetlands</p>
+            <p class="hero-location">Shortland, Newcastle NSW</p>
+          </div>
+        </div>
+
+        <div class="quick-info-bar">
+          <div class="quick-info-item">
+            <span class="quick-info-icon">&#128337;</span>
+            <span>9am - 4pm</span>
+          </div>
+          <div class="quick-info-item">
+            <span class="quick-info-icon">&#128197;</span>
+            <span>7 days</span>
+          </div>
+          <div class="quick-info-item">
+            <span class="quick-info-icon">&#128176;</span>
+            <span>From $6</span>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Explore</h3>
+          <div class="card-grid">
+            <button class="feature-card" data-page="walks">
+              <div class="feature-card-icon">&#128694;</div>
+              <div class="feature-card-text">
+                <h4>Walks &amp; Trails</h4>
+                <p>4km of walking trails to explore</p>
+              </div>
+              <div class="feature-card-arrow">&rsaquo;</div>
+            </button>
+            <button class="feature-card" data-page="wildlife">
+              <div class="feature-card-icon">&#129414;</div>
+              <div class="feature-card-text">
+                <h4>Wildlife Guide</h4>
+                <p>200+ species to discover</p>
+              </div>
+              <div class="feature-card-arrow">&rsaquo;</div>
+            </button>
+            <button class="feature-card" data-page="activities">
+              <div class="feature-card-icon">&#128675;</div>
+              <div class="feature-card-text">
+                <h4>Activities</h4>
+                <p>Canoeing, dip netting &amp; more</p>
+              </div>
+              <div class="feature-card-arrow">&rsaquo;</div>
+            </button>
+            <button class="feature-card" data-page="visitor-info">
+              <div class="feature-card-icon">&#8505;</div>
+              <div class="feature-card-text">
+                <h4>Visitor Info</h4>
+                <p>Hours, prices &amp; getting here</p>
+              </div>
+              <div class="feature-card-arrow">&rsaquo;</div>
+            </button>
+            <button class="feature-card" data-page="about">
+              <div class="feature-card-icon">&#127793;</div>
+              <div class="feature-card-text">
+                <h4>About &amp; Conservation</h4>
+                <p>Our story &amp; Ramsar significance</p>
+              </div>
+              <div class="feature-card-arrow">&rsaquo;</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Today's Tips</h3>
+          <div class="tip-card">
+            <div class="tip-icon">&#9728;&#65039;</div>
+            <div class="tip-text">
+              <strong>Best wildlife viewing</strong><br>
+              Visit early morning or late afternoon for the best chance of spotting active wildlife.
+            </div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#128228;</div>
+            <div class="tip-text">
+              <strong>Free guided walks</strong><br>
+              Tuesdays &amp; Saturdays - 30-40 minute guided walks included with entry.
+            </div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#129531;</div>
+            <div class="tip-text">
+              <strong>Don't forget!</strong><br>
+              Bring a hat, water &amp; insect repellent. Closed-in shoes recommended. Free repellent at reception.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WALKS & TRAILS PAGE -->
+      <section id="page-walks" class="page">
+        <div class="page-intro">
+          <p>Discover 4km of walking trails and 2km of canoe trails through internationally significant wetlands. Look out for hand-carved totem poles along the way!</p>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Suggested Walks</h3>
+
+          <button class="walk-card" data-walk="sensory">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Sensory Trail</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-easy">Easy</span>
+                  <span class="tag tag-time">15-20 min</span>
+                  <span class="tag tag-family">Family Friendly</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">A hands-on nature experience with informative signs explaining what plants to touch, smell and discover. Perfect for kids and families.</p>
+          </button>
+
+          <button class="walk-card" data-walk="bush-tucker">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Bush Tucker Garden Trail</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-easy">Easy</span>
+                  <span class="tag tag-time">20-30 min</span>
+                  <span class="tag tag-culture">Cultural</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">Learn about native plants and how Aboriginal peoples used them. Interpretive signs throughout reveal traditional uses and stories.</p>
+          </button>
+
+          <button class="walk-card" data-walk="egret-tower">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Egret Tower &amp; Melaleuca Swamp Walk</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-easy">Easy</span>
+                  <span class="tag tag-time">30-40 min</span>
+                  <span class="tag tag-birds">Birdwatching</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">Walk to the 2-storey Egret Tower overlooking Melaleuca Swamp - a freshwater swamp forest used as a heronry by 4 egret species and a roost for ibis.</p>
+          </button>
+
+          <button class="walk-card" data-walk="bird-hide">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Bird Hide &amp; Boardwalk Circuit</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-easy">Easy</span>
+                  <span class="tag tag-time">40-50 min</span>
+                  <span class="tag tag-birds">Birdwatching</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">Visit the purpose-built bird hides including the Water Ribbon Swamp hide built over the water. Boardwalks connect observation points across the wetlands.</p>
+          </button>
+
+          <button class="walk-card" data-walk="full-loop">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Full Wetlands Loop</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-moderate">Moderate</span>
+                  <span class="tag tag-time">1.5-2 hrs</span>
+                  <span class="tag tag-nature">Nature</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">The complete 4km trail network taking in all habitats - from freshwater ponds and marshes to woodland and swamp forest. See all the totem poles!</p>
+          </button>
+
+          <button class="walk-card" data-walk="canoe">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Ironbark Creek Canoe Trail</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-moderate">Moderate</span>
+                  <span class="tag tag-time">2 hrs</span>
+                  <span class="tag tag-water">Paddle</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">Paddle 2km along Ironbark Creek to the rainforest shelter. Hire a 2 or 3 person canoe from reception. Ages 4+. Subject to tidal conditions.</p>
+          </button>
+
+          <button class="walk-card" data-walk="orienteering">
+            <div class="walk-header">
+              <div class="walk-info">
+                <h4>Orienteering Course</h4>
+                <div class="walk-tags">
+                  <span class="tag tag-moderate">Moderate</span>
+                  <span class="tag tag-time">1-2 hrs</span>
+                  <span class="tag tag-adventure">Adventure</span>
+                </div>
+              </div>
+              <div class="walk-arrow">&rsaquo;</div>
+            </div>
+            <p class="walk-desc">Navigate using a topographical map to find checkpoints across the site. Designed by Newcastle Orienteering Club. No compass needed! Maps at reception.</p>
+          </button>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Guided Walks</h3>
+          <div class="info-card highlight-card">
+            <h4>Free Guided Walks</h4>
+            <p><strong>Every Tuesday &amp; Saturday</strong></p>
+            <p>30-40 minute guided walks covering the history, conservation, flora and fauna of the wetlands. A courtesy tour for individuals and small family groups.</p>
+            <p class="info-note">Groups of 6+ can book special interest tours (native plants, birds, photography) for an extra charge.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WALK DETAIL PAGES -->
+      <section id="page-walk-detail" class="page">
+        <div id="walk-detail-content"></div>
+      </section>
+
+      <!-- WILDLIFE PAGE -->
+      <section id="page-wildlife" class="page">
+        <div class="page-intro">
+          <p>Hunter Wetlands Centre is home to over 200 wildlife species, including 217 recorded bird species across 56 families. The 45-hectare site provides diverse habitats from freshwater ponds to swamp forest.</p>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Birds</h3>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="waterbirds">
+              <span>&#129414; Waterbirds &amp; Waterfowl</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="waterbirds" class="wildlife-list hidden">
+              <div class="species-item">
+                <strong>Black Swan</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Magpie Goose</strong>
+                <span class="species-status vulnerable">Vulnerable</span>
+              </div>
+              <div class="species-item">
+                <strong>Freckled Duck</strong>
+                <span class="species-status vulnerable">Vulnerable</span>
+              </div>
+              <div class="species-item">
+                <strong>Pacific Black Duck</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Grey Teal</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Chestnut Teal</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Australian Shoveler</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Hardhead</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Wandering Whistling Duck</strong>
+                <span class="species-status seasonal">Seasonal</span>
+              </div>
+              <div class="species-item">
+                <strong>Australasian Grebe</strong>
+                <span class="species-status common">Common</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="waders">
+              <span>&#129441; Herons, Egrets &amp; Ibis</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="waders" class="wildlife-list hidden">
+              <div class="species-item">
+                <strong>White-faced Heron</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Great Egret</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Little Egret</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Cattle Egret</strong>
+                <span class="species-status seasonal">Seasonal</span>
+              </div>
+              <div class="species-item">
+                <strong>Intermediate Egret</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Australian White Ibis</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Straw-necked Ibis</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Royal Spoonbill</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="info-note">Melaleuca Swamp is used as a heronry by 4 egret species. Visit the Egret Tower for the best views!</div>
+            </div>
+          </div>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="shorebirds">
+              <span>&#128038; Migratory Shorebirds</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="shorebirds" class="wildlife-list hidden">
+              <p class="species-note">During local droughts, dropping water levels expose mudflats and shallow margins which provide foraging areas for migratory shorebirds. The centre is an important strategic refuge during inland drought.</p>
+              <div class="species-item">
+                <strong>Sharp-tailed Sandpiper</strong>
+                <span class="species-status seasonal">Seasonal</span>
+              </div>
+              <div class="species-item">
+                <strong>Latham's Snipe</strong>
+                <span class="species-status seasonal">Seasonal</span>
+              </div>
+              <div class="species-item">
+                <strong>Masked Lapwing</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Black-winged Stilt</strong>
+                <span class="species-status common">Common</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="raptors">
+              <span>&#129413; Raptors &amp; Other Birds</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="raptors" class="wildlife-list hidden">
+              <div class="species-item">
+                <strong>White-bellied Sea-Eagle</strong>
+                <span class="species-status occasional">Occasional</span>
+              </div>
+              <div class="species-item">
+                <strong>Whistling Kite</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Laughing Kookaburra</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Sacred Kingfisher</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Superb Fairy-wren</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Rainbow Lorikeet</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="info-note">28 bird species have been observed breeding within the wetlands. A total of 217 bird species across 56 families have been recorded at the site.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Other Wildlife</h3>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="mammals">
+              <span>&#129415; Mammals</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="mammals" class="wildlife-list hidden">
+              <div class="species-item">
+                <strong>Grey-headed Flying Fox</strong>
+                <span class="species-status vulnerable">Vulnerable</span>
+              </div>
+              <div class="species-item">
+                <strong>Little Red Flying Fox</strong>
+                <span class="species-status common">Native</span>
+              </div>
+              <div class="species-item">
+                <strong>Northern Brown Bandicoot</strong>
+                <span class="species-status common">Native</span>
+              </div>
+              <div class="species-item">
+                <strong>Water Rat (Rakali)</strong>
+                <span class="species-status occasional">Occasional</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wildlife-category">
+            <button class="wildlife-header" data-toggle="reptiles">
+              <span>&#128013; Reptiles &amp; Amphibians</span>
+              <span class="toggle-icon">+</span>
+            </button>
+            <div id="reptiles" class="wildlife-list hidden">
+              <p class="species-note">Reptile encounters are available as a special activity - ask at reception! The wetlands are also home to a variety of frogs, lizards and other reptiles.</p>
+              <div class="species-item">
+                <strong>Eastern Water Dragon</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Lace Monitor</strong>
+                <span class="species-status occasional">Occasional</span>
+              </div>
+              <div class="species-item">
+                <strong>Eastern Long-necked Turtle</strong>
+                <span class="species-status common">Common</span>
+              </div>
+              <div class="species-item">
+                <strong>Green Tree Frog</strong>
+                <span class="species-status common">Common</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <div class="info-card">
+            <h4>Birdwatching Facilities</h4>
+            <ul class="facilities-list">
+              <li>4 purpose-built bird hides</li>
+              <li>Water Ribbon Swamp hide (built over water)</li>
+              <li>Egret Tower (2-storey, overlooking Melaleuca Swamp)</li>
+              <li>Observation decks throughout the trail network</li>
+              <li>Monthly bird surveys by volunteer Paddy Lightfoot</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVITIES PAGE -->
+      <section id="page-activities" class="page">
+        <div class="page-intro">
+          <p>From canoeing and dip netting to guided walks and reptile encounters - there's something for everyone at Hunter Wetlands Centre.</p>
+        </div>
+
+        <div class="content-section">
+          <div class="activity-card">
+            <div class="activity-icon">&#128675;</div>
+            <div class="activity-content">
+              <h4>Canoeing</h4>
+              <div class="activity-meta">
+                <span class="tag tag-time">2 hours</span>
+                <span class="tag tag-family">Ages 4+</span>
+              </div>
+              <p>Paddle a 2km trail along Ironbark Creek to the rainforest shelter. Hire a 2 or 3 person canoe from reception.</p>
+              <ul>
+                <li>Self-guided paddle, private tour guide, or monthly group tours</li>
+                <li>Subject to tidal conditions - check at reception</li>
+                <li>Closed-in shoes mandatory</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-icon">&#129690;</div>
+            <div class="activity-content">
+              <h4>Dip Netting</h4>
+              <div class="activity-meta">
+                <span class="tag tag-easy">All Ages</span>
+                <span class="tag tag-cost">Gold coin donation</span>
+              </div>
+              <p>One of the most popular activities! Grab a net and bucket from reception and head to the jetty to catch insects and water bugs in the pond.</p>
+              <ul>
+                <li>Gold coin donation</li>
+                <li>Nets and buckets provided</li>
+                <li>All ages welcome</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-icon">&#128205;</div>
+            <div class="activity-content">
+              <h4>Orienteering</h4>
+              <div class="activity-meta">
+                <span class="tag tag-moderate">All Abilities</span>
+                <span class="tag tag-time">1-2 hours</span>
+              </div>
+              <p>Navigate using a topographical map to find checkpoints across the site. Designed by Newcastle Orienteering Club.</p>
+              <ul>
+                <li>No compass required</li>
+                <li>Maps available at reception or download from website</li>
+                <li>Great for families, scouts and school groups</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-icon">&#128013;</div>
+            <div class="activity-content">
+              <h4>Reptile Encounters</h4>
+              <div class="activity-meta">
+                <span class="tag tag-family">Family Friendly</span>
+              </div>
+              <p>Get up close with Australian reptiles in a safe, supervised setting. Ask at reception for availability and session times.</p>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-icon">&#127967;</div>
+            <div class="activity-content">
+              <h4>Discovery Playground</h4>
+              <div class="activity-meta">
+                <span class="tag tag-family">Kids</span>
+              </div>
+              <p>The children's discovery playground provides a nature-based play space for younger visitors.</p>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-icon">&#128247;</div>
+            <div class="activity-content">
+              <h4>Bird Photography</h4>
+              <div class="activity-meta">
+                <span class="tag tag-birds">Special Interest</span>
+              </div>
+              <p>With 4 purpose-built hides and over 200 species, the wetlands are a photographer's paradise. Specialist photography tours available for groups of 6+.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">School Holiday Programs</h3>
+          <div class="info-card">
+            <p>Hunter Wetlands Centre runs special programs during school holidays with activities tailored for different age groups. Check the website or reception for the current program.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISITOR INFO PAGE -->
+      <section id="page-visitor-info" class="page">
+        <div class="content-section">
+          <h3 class="section-title">Opening Hours</h3>
+          <div class="info-card">
+            <div class="hours-display">
+              <div class="hours-main">9:00 AM - 4:00 PM</div>
+              <div class="hours-days">Open 7 days a week</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Entry Fees</h3>
+          <div class="info-card">
+            <table class="price-table">
+              <tr>
+                <td>Child (3 and under)</td>
+                <td class="price">FREE</td>
+              </tr>
+              <tr>
+                <td>Child (4-15 years)</td>
+                <td class="price">$6.00</td>
+              </tr>
+              <tr>
+                <td>General Entry (16+)</td>
+                <td class="price">$9.50</td>
+              </tr>
+              <tr>
+                <td>Concession</td>
+                <td class="price">$6.00</td>
+              </tr>
+              <tr>
+                <td>Family (2 adults + 2 children<br><small>or 1 adult + 3 children</small>)</td>
+                <td class="price">$25.00</td>
+              </tr>
+              <tr>
+                <td>Group (10+)</td>
+                <td class="price">$7.00 pp</td>
+              </tr>
+              <tr>
+                <td>Carers (with carers card)</td>
+                <td class="price">FREE</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Annual Membership</td>
+                <td class="price">$25.00</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Getting Here</h3>
+          <div class="info-card">
+            <h4>Address</h4>
+            <p>Sandgate Road, Shortland NSW 2307</p>
+            <p class="info-note">13km from Newcastle CBD</p>
+
+            <h4>By Car</h4>
+            <p>From the Pacific Highway (M1), take the Sandgate Road exit. The centre is well signposted. Free parking available on site.</p>
+
+            <h4>Public Transport</h4>
+            <p>Bus services run to Shortland. Check Transport NSW for current timetables.</p>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Facilities</h3>
+          <div class="facilities-grid">
+            <div class="facility-item">
+              <span class="facility-icon">&#9855;</span>
+              <span>Wheelchair Access</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#128699;</span>
+              <span>Toilets</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#127861;</span>
+              <span>Cafe / Kiosk</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#128663;</span>
+              <span>Free Parking</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#128054;</span>
+              <span>Assistance Dogs</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#128717;</span>
+              <span>Gift Shop</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#127968;</span>
+              <span>Meeting Rooms</span>
+            </div>
+            <div class="facility-item">
+              <span class="facility-icon">&#128268;</span>
+              <span>Lift Access</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">What to Bring</h3>
+          <div class="checklist">
+            <div class="checklist-item">&#9745; Hat and sunscreen</div>
+            <div class="checklist-item">&#9745; Water bottle</div>
+            <div class="checklist-item">&#9745; Insect repellent (also free at reception)</div>
+            <div class="checklist-item">&#9745; Closed-in shoes (mandatory for canoeing)</div>
+            <div class="checklist-item">&#9745; Binoculars (for birdwatching)</div>
+            <div class="checklist-item">&#9745; Camera</div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Accessibility</h3>
+          <div class="info-card">
+            <ul class="facilities-list">
+              <li>Lift access to ground level from visitor centre</li>
+              <li>Wheelchair accessible with ramp access to meeting rooms</li>
+              <li>Boardwalks on many trail sections</li>
+              <li>Guide dogs and accredited assistance dogs welcome</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT PAGE -->
+      <section id="page-about" class="page">
+        <div class="content-section">
+          <h3 class="section-title">About the Centre</h3>
+          <div class="info-card">
+            <p>The Hunter Wetlands Centre is a <strong>self-funded, community-owned, not-for-profit charity</strong> dedicated to conserving and celebrating the Hunter region's internationally significant wetlands.</p>
+            <p>Located on <strong>45 hectares</strong> of rehabilitated land in Shortland, Newcastle, the site was once a dumping ground but has been transformed into a thriving conservation sanctuary.</p>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Ramsar Significance</h3>
+          <div class="info-card highlight-card">
+            <p>The Hunter Wetlands are recognised under the <strong>Ramsar Convention</strong> as wetlands of international significance. This designation highlights their importance for:</p>
+            <ul class="facilities-list">
+              <li>Supporting over 200 wildlife species</li>
+              <li>Providing critical habitat for vulnerable species including Magpie Goose and Freckled Duck</li>
+              <li>Acting as a strategic drought refuge for waterbirds</li>
+              <li>Supporting 28 breeding bird species on site</li>
+              <li>Serving as an important stopover for migratory shorebirds</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Conservation</h3>
+          <div class="info-card">
+            <p>The centre works to regenerate and conserve local wildlife habitat through:</p>
+            <ul class="facilities-list">
+              <li>Habitat restoration and management</li>
+              <li>Monthly bird surveys and monitoring</li>
+              <li>Environmental education programs</li>
+              <li>School and community engagement</li>
+              <li>Native plant propagation</li>
+            </ul>
+            <p class="info-note">As a not-for-profit charity, your entry fee directly supports conservation efforts. Consider an annual membership ($25) to support ongoing work.</p>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Habitats</h3>
+          <div class="habitat-grid">
+            <div class="habitat-card">
+              <h4>Freshwater Ponds</h4>
+              <p>Deep open water supporting waterfowl including Black Swan, Grey Teal and Hardhead.</p>
+            </div>
+            <div class="habitat-card">
+              <h4>Melaleuca Swamp</h4>
+              <p>Freshwater swamp forest used as a heronry by 4 egret species and an evening roost for ibis.</p>
+            </div>
+            <div class="habitat-card">
+              <h4>Marshes &amp; Mudflats</h4>
+              <p>Seasonal habitat providing foraging areas for migratory shorebirds when water levels drop.</p>
+            </div>
+            <div class="habitat-card">
+              <h4>Woodland</h4>
+              <p>Native woodland providing habitat for bush birds, mammals and reptiles.</p>
+            </div>
+            <div class="habitat-card">
+              <h4>Ironbark Creek</h4>
+              <p>Tidal creek winding through the site, accessible by canoe, leading to rainforest.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="section-title">Contact</h3>
+          <div class="info-card">
+            <p><strong>Hunter Wetlands Centre Australia</strong></p>
+            <p>Sandgate Road, Shortland NSW 2307</p>
+            <p>Website: <a href="https://www.wetlands.org.au" target="_blank" rel="noopener">wetlands.org.au</a></p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-page="walks">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span>Walks</span>
+      </button>
+      <button class="nav-item" data-page="wildlife">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <span>Wildlife</span>
+      </button>
+      <button class="nav-item" data-page="activities">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <span>Activities</span>
+      </button>
+      <button class="nav-item" data-page="visitor-info">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Info</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
