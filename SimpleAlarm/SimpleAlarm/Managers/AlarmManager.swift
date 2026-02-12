@@ -169,6 +169,12 @@ class AlarmManager: ObservableObject {
         autoStopTimer = nil
         isAlarmFiring = false
         firingAlarm = nil
+
+        // Deactivate our audio session so other apps (e.g. music) can resume
+        try? AVAudioSession.sharedInstance().setActive(
+            false,
+            options: .notifyOthersOnDeactivation
+        )
     }
 
     func snoozeAlarm(minutes: Int = 9) {
@@ -210,8 +216,20 @@ class AlarmManager: ObservableObject {
 
     private func configureAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
-            try AVAudioSession.sharedInstance().setActive(true)
+            // .playback category overrides the silent/mute switch, matching
+            // the built-in iOS Clock alarm behaviour.  Omitting .mixWithOthers
+            // ensures the system treats this as primary audio so the mute
+            // switch is ignored.  .duckOthers lowers other audio (e.g. music)
+            // while the alarm rings rather than cutting it off entirely.
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.duckOthers]
+            )
+            try AVAudioSession.sharedInstance().setActive(
+                true,
+                options: .notifyOthersOnDeactivation
+            )
         } catch {
             print("Audio session error: \(error)")
         }
