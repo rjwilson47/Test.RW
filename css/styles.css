@@ -26,6 +26,18 @@
   --nav-height: 64px;
   --header-height: 56px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* ===== Native iOS overrides ===== */
+body.native-ios .app-header {
+  padding-top: var(--safe-top);
+  height: calc(var(--header-height) + var(--safe-top));
+}
+
+body.native-ios .bottom-nav {
+  padding-bottom: var(--safe-bottom);
+  height: calc(var(--nav-height) + var(--safe-bottom));
 }
 
 /* ===== Reset & Base ===== */

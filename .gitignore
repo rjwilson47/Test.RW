@@ -1,0 +1,7 @@
+node_modules/
+dist/
+ios/
+.DS_Store
+*.xcworkspace
+*.xcodeproj
+Pods/

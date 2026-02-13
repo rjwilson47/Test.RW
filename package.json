@@ -1,0 +1,30 @@
+{
+  "name": "hunter-wetlands-guide",
+  "version": "1.0.0",
+  "description": "Hunter Wetlands Centre visitor guide iOS app",
+  "scripts": {
+    "build": "echo 'Static site - no build step needed' && cp -r index.html css js icons manifest.json sw.js dist/ 2>/dev/null || mkdir -p dist && cp -r index.html css js icons manifest.json sw.js dist/",
+    "cap:sync": "npx cap sync ios",
+    "cap:open": "npx cap open ios",
+    "cap:build": "npm run build && npx cap sync ios"
+  },
+  "keywords": [
+    "wetlands",
+    "hunter",
+    "visitor-guide",
+    "ios"
+  ],
+  "author": "Hunter Wetlands Centre",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/haptics": "^8.0.0",
+    "@capacitor/ios": "^8.1.0",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
