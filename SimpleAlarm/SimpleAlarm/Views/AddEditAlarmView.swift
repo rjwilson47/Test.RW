@@ -344,6 +344,7 @@ struct RepeatDaysView: View {
 
 struct SoundSelectionView: View {
     @Binding var selectedSound: AlarmSound
+    @EnvironmentObject var alarmManager: AlarmManager
 
     var body: some View {
         ZStack {
@@ -353,6 +354,7 @@ struct SoundSelectionView: View {
                 ForEach(AlarmSound.allCases, id: \.self) { sound in
                     Button {
                         selectedSound = sound
+                        alarmManager.previewSound(sound)
                     } label: {
                         HStack {
                             Image(systemName: sound.iconName)
@@ -375,5 +377,8 @@ struct SoundSelectionView: View {
         .navigationTitle("Sound")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
+        .onDisappear {
+            alarmManager.stopPreview()
+        }
     }
 }

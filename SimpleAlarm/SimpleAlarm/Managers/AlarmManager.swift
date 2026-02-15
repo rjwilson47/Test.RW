@@ -234,9 +234,8 @@ class AlarmManager: ObservableObject {
         }
     }
 
-    private func playGeneratedTone(sound: AlarmSound = .pulse) {
+    private func playGeneratedTone(sound: AlarmSound = .pulse, duration: Double = 2.0, loop: Bool = true) {
         let sampleRate: Double = 44100
-        let duration: Double = 2.0
         let frequency = sound.frequency
         let beepDuration = sound.beepDuration
         let cycleDuration = beepDuration + sound.silenceDuration
@@ -267,17 +266,34 @@ class AlarmManager: ObservableObject {
             let cyclePosition = time.truncatingRemainder(dividingBy: cycleDuration)
             let isBeep = cyclePosition < beepDuration
 
-            let amplitude: Double = isBeep ? 0.5 : 0.0
+            let amplitude: Double = isBeep ? 0.9 : 0.0
             let sample = Int16(amplitude * sin(2.0 * .pi * frequency * time) * Double(Int16.max))
             audioData.append(contentsOf: withUnsafeBytes(of: sample.littleEndian) { Array($0) })
         }
 
         do {
             audioPlayer = try AVAudioPlayer(data: audioData)
-            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.numberOfLoops = loop ? -1 : 0
             audioPlayer?.play()
         } catch {
             print("Failed to play generated tone: \(error)")
         }
+    }
+
+    // MARK: - Sound Preview
+
+    func previewSound(_ sound: AlarmSound) {
+        stopPreview()
+        configureAudioSession()
+        playGeneratedTone(sound: sound, duration: 3.0, loop: false)
+    }
+
+    func stopPreview() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+        try? AVAudioSession.sharedInstance().setActive(
+            false,
+            options: .notifyOthersOnDeactivation
+        )
     }
 }
