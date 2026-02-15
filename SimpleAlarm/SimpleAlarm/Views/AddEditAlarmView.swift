@@ -23,6 +23,8 @@ struct AddEditAlarmView: View {
     @State private var stopMode: AlarmStopMode
     @State private var autoStopSeconds: Int
     @State private var repeatDays: Set<Int>
+    @State private var snoozeEnabled: Bool
+    @State private var sound: AlarmSound
     @State private var showDeleteConfirm = false
 
     private var isEditing: Bool {
@@ -42,6 +44,8 @@ struct AddEditAlarmView: View {
             _stopMode = State(initialValue: .manual)
             _autoStopSeconds = State(initialValue: 20)
             _repeatDays = State(initialValue: [])
+            _snoozeEnabled = State(initialValue: true)
+            _sound = State(initialValue: .radar)
 
         case .edit(let alarm):
             var components = DateComponents()
@@ -53,6 +57,8 @@ struct AddEditAlarmView: View {
             _stopMode = State(initialValue: alarm.stopMode)
             _autoStopSeconds = State(initialValue: alarm.stopMode.isAutomatic ? alarm.stopMode.seconds : 20)
             _repeatDays = State(initialValue: alarm.repeatDays)
+            _snoozeEnabled = State(initialValue: alarm.snoozeEnabled)
+            _sound = State(initialValue: alarm.sound)
         }
     }
 
@@ -92,6 +98,27 @@ struct AddEditAlarmView: View {
 
                             Divider().background(Color.gray.opacity(0.3))
 
+                            // Sound Selection
+                            NavigationLink {
+                                SoundSelectionView(selectedSound: $sound)
+                            } label: {
+                                settingsRow(title: "Sound") {
+                                    Text(sound.rawValue)
+                                        .foregroundColor(.gray)
+                                }
+                            }
+
+                            Divider().background(Color.gray.opacity(0.3))
+
+                            // Snooze Toggle
+                            settingsRow(title: "Snooze") {
+                                Toggle("", isOn: $snoozeEnabled)
+                                    .labelsHidden()
+                                    .tint(.blue)
+                            }
+
+                            Divider().background(Color.gray.opacity(0.3))
+
                             // Stop Mode
                             VStack(spacing: 0) {
                                 settingsRow(title: "Alarm Duration") {
@@ -118,7 +145,7 @@ struct AddEditAlarmView: View {
                                                 .foregroundColor(.white)
                                             Spacer()
                                             Text("\(autoStopSeconds) seconds")
-                                                .foregroundColor(.orange)
+                                                .foregroundColor(.blue)
                                                 .fontWeight(.medium)
                                         }
                                         .padding(.horizontal, 16)
@@ -134,7 +161,7 @@ struct AddEditAlarmView: View {
                                             in: 5...300,
                                             step: 5
                                         )
-                                        .tint(.orange)
+                                        .tint(.blue)
                                         .padding(.horizontal, 16)
 
                                         HStack {
@@ -183,11 +210,11 @@ struct AddEditAlarmView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") { dismiss() }
-                        .foregroundColor(.orange)
+                        .foregroundColor(.blue)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") { saveAlarm() }
-                        .foregroundColor(.orange)
+                        .foregroundColor(.blue)
                         .fontWeight(.semibold)
                 }
             }
@@ -243,7 +270,9 @@ struct AddEditAlarmView: View {
                 isEnabled: true,
                 label: label.isEmpty ? "Alarm" : label,
                 stopMode: finalStopMode,
-                repeatDays: repeatDays
+                repeatDays: repeatDays,
+                snoozeEnabled: snoozeEnabled,
+                sound: sound
             )
             alarmManager.addAlarm(alarm)
 
@@ -253,6 +282,8 @@ struct AddEditAlarmView: View {
             alarm.label = label.isEmpty ? "Alarm" : label
             alarm.stopMode = finalStopMode
             alarm.repeatDays = repeatDays
+            alarm.snoozeEnabled = snoozeEnabled
+            alarm.sound = sound
             alarmManager.updateAlarm(alarm)
         }
 
@@ -294,7 +325,7 @@ struct RepeatDaysView: View {
                             Spacer()
                             if selectedDays.contains(day.0) {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(.orange)
+                                    .foregroundColor(.blue)
                             }
                         }
                     }
@@ -304,6 +335,44 @@ struct RepeatDaysView: View {
             .listStyle(.plain)
         }
         .navigationTitle("Repeat")
+        .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - Sound Selection
+
+struct SoundSelectionView: View {
+    @Binding var selectedSound: AlarmSound
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            List {
+                ForEach(AlarmSound.allCases, id: \.self) { sound in
+                    Button {
+                        selectedSound = sound
+                    } label: {
+                        HStack {
+                            Image(systemName: sound.iconName)
+                                .foregroundColor(.blue)
+                                .frame(width: 24)
+                            Text(sound.rawValue)
+                                .foregroundColor(.white)
+                            Spacer()
+                            if selectedSound == sound {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                    }
+                    .listRowBackground(Color(white: 0.11))
+                }
+            }
+            .listStyle(.plain)
+        }
+        .navigationTitle("Sound")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
     }

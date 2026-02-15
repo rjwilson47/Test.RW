@@ -1,5 +1,58 @@
 import Foundation
 
+enum AlarmSound: String, Codable, CaseIterable, Equatable {
+    case radar = "Radar"
+    case beacon = "Beacon"
+    case chime = "Chime"
+    case signal = "Signal"
+    case classic = "Classic"
+    case gentle = "Gentle"
+
+    var frequency: Double {
+        switch self {
+        case .radar: return 880.0    // A5
+        case .beacon: return 523.25  // C5
+        case .chime: return 1046.5   // C6
+        case .signal: return 659.25  // E5
+        case .classic: return 440.0  // A4
+        case .gentle: return 392.0   // G4
+        }
+    }
+
+    var beepDuration: Double {
+        switch self {
+        case .radar: return 0.3
+        case .beacon: return 0.5
+        case .chime: return 0.15
+        case .signal: return 0.4
+        case .classic: return 0.25
+        case .gentle: return 0.6
+        }
+    }
+
+    var silenceDuration: Double {
+        switch self {
+        case .radar: return 0.2
+        case .beacon: return 0.3
+        case .chime: return 0.35
+        case .signal: return 0.1
+        case .classic: return 0.25
+        case .gentle: return 0.8
+        }
+    }
+
+    var iconName: String {
+        switch self {
+        case .radar: return "antenna.radiowaves.left.and.right"
+        case .beacon: return "light.beacon.max"
+        case .chime: return "bell"
+        case .signal: return "waveform"
+        case .classic: return "alarm"
+        case .gentle: return "leaf"
+        }
+    }
+}
+
 enum AlarmStopMode: Codable, Equatable {
     case manual
     case automatic(seconds: Int)
@@ -34,6 +87,8 @@ struct Alarm: Identifiable, Codable, Equatable {
     var label: String
     var stopMode: AlarmStopMode
     var repeatDays: Set<Int> // 1=Sun, 2=Mon, ..., 7=Sat; empty = one-shot
+    var snoozeEnabled: Bool
+    var sound: AlarmSound
 
     var timeString: String {
         let h = hour % 12 == 0 ? 12 : hour % 12
@@ -78,7 +133,9 @@ struct Alarm: Identifiable, Codable, Equatable {
         isEnabled: Bool = true,
         label: String = "Alarm",
         stopMode: AlarmStopMode = .manual,
-        repeatDays: Set<Int> = []
+        repeatDays: Set<Int> = [],
+        snoozeEnabled: Bool = true,
+        sound: AlarmSound = .radar
     ) {
         self.id = id
         self.hour = hour
@@ -87,5 +144,7 @@ struct Alarm: Identifiable, Codable, Equatable {
         self.label = label
         self.stopMode = stopMode
         self.repeatDays = repeatDays
+        self.snoozeEnabled = snoozeEnabled
+        self.sound = sound
     }
 }

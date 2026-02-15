@@ -16,18 +16,18 @@ struct AlarmFiringView: View {
                 // Pulsing alarm icon
                 ZStack {
                     Circle()
-                        .fill(Color.orange.opacity(0.15))
+                        .fill(Color.blue.opacity(0.15))
                         .frame(width: 160, height: 160)
                         .scaleEffect(pulseScale)
 
                     Circle()
-                        .fill(Color.orange.opacity(0.25))
+                        .fill(Color.blue.opacity(0.25))
                         .frame(width: 120, height: 120)
                         .scaleEffect(pulseScale * 0.9)
 
                     Image(systemName: "alarm.fill")
                         .font(.system(size: 50))
-                        .foregroundColor(.orange)
+                        .foregroundColor(.blue)
                 }
 
                 // Time
@@ -45,7 +45,7 @@ struct AlarmFiringView: View {
                         if alarm.stopMode.isAutomatic {
                             Text("Auto-stops in \(alarm.stopMode.seconds) seconds")
                                 .font(.subheadline)
-                                .foregroundColor(.orange)
+                                .foregroundColor(.blue)
                         }
                     }
                 }
@@ -54,18 +54,20 @@ struct AlarmFiringView: View {
 
                 // Action buttons
                 VStack(spacing: 16) {
-                    // Snooze button
-                    Button {
-                        alarmManager.snoozeAlarm()
-                    } label: {
-                        Text("Snooze")
-                            .font(.title3)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(Color(white: 0.2))
-                            .cornerRadius(14)
+                    // Snooze button (only if snooze is enabled)
+                    if alarmManager.firingAlarm?.snoozeEnabled == true {
+                        Button {
+                            alarmManager.snoozeAlarm()
+                        } label: {
+                            Text("Snooze")
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(Color(white: 0.2))
+                                .cornerRadius(14)
+                        }
                     }
 
                     // Stop button
@@ -78,7 +80,7 @@ struct AlarmFiringView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
-                            .background(Color.orange)
+                            .background(Color.blue)
                             .cornerRadius(14)
                     }
                 }

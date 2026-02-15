@@ -37,18 +37,18 @@ struct AlarmListView: View {
                     .listStyle(.plain)
                 }
             }
-            .navigationTitle("Alarms")
+            .navigationTitle("Autostop Alarms")
             .navigationBarTitleDisplayMode(.large)
             .preferredColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
-                        .foregroundColor(.orange)
+                        .foregroundColor(.blue)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddAlarm = true }) {
                         Image(systemName: "plus")
-                            .foregroundColor(.orange)
+                            .foregroundColor(.blue)
                     }
                 }
             }
@@ -89,12 +89,12 @@ struct AlarmRowView: View {
                     if alarm.stopMode.isAutomatic {
                         Text("· \(alarm.stopMode.seconds)s")
                             .font(.caption)
-                            .foregroundColor(.orange.opacity(alarm.isEnabled ? 1.0 : 0.5))
+                            .foregroundColor(.blue.opacity(alarm.isEnabled ? 1.0 : 0.5))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(
                                 Capsule()
-                                    .fill(Color.orange.opacity(alarm.isEnabled ? 0.2 : 0.1))
+                                    .fill(Color.blue.opacity(alarm.isEnabled ? 0.2 : 0.1))
                             )
                     }
 

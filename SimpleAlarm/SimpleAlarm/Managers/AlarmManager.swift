@@ -142,7 +142,7 @@ class AlarmManager: ObservableObject {
     func fireAlarm(_ alarm: Alarm) {
         firingAlarm = alarm
         isAlarmFiring = true
-        playAlarmSound()
+        playAlarmSound(alarm.sound)
 
         // Auto-stop if configured
         if case .automatic(let seconds) = alarm.stopMode {
@@ -177,7 +177,7 @@ class AlarmManager: ObservableObject {
         )
     }
 
-    func snoozeAlarm(minutes: Int = 9) {
+    func snoozeAlarm(minutes: Int = 5) {
         guard let alarm = firingAlarm else { return }
         stopAlarm()
 
@@ -195,14 +195,14 @@ class AlarmManager: ObservableObject {
 
     // MARK: - Sound
 
-    private func playAlarmSound() {
+    private func playAlarmSound(_ sound: AlarmSound = .radar) {
         configureAudioSession()
 
-        // Try to load custom tone, fall back to system sound
+        // Try to load custom tone, fall back to generated sound
         if let url = Bundle.main.url(forResource: "alarm_tone", withExtension: "wav") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.numberOfLoops = -1 // Loop indefinitely
+                audioPlayer?.numberOfLoops = -1
                 audioPlayer?.play()
                 return
             } catch {
@@ -210,8 +210,7 @@ class AlarmManager: ObservableObject {
             }
         }
 
-        // Fallback: generate a simple tone programmatically
-        playGeneratedTone()
+        playGeneratedTone(sound: sound)
     }
 
     private func configureAudioSession() {
@@ -235,11 +234,12 @@ class AlarmManager: ObservableObject {
         }
     }
 
-    private func playGeneratedTone() {
-        // Generate a simple sine wave tone
+    private func playGeneratedTone(sound: AlarmSound = .radar) {
         let sampleRate: Double = 44100
         let duration: Double = 2.0
-        let frequency: Double = 880.0 // A5 note
+        let frequency = sound.frequency
+        let beepDuration = sound.beepDuration
+        let cycleDuration = beepDuration + sound.silenceDuration
         let numSamples = Int(sampleRate * duration)
 
         var audioData = Data()
@@ -252,21 +252,20 @@ class AlarmManager: ObservableObject {
         audioData.append(contentsOf: withUnsafeBytes(of: fileSize.littleEndian) { Array($0) })
         audioData.append(contentsOf: "WAVE".utf8)
         audioData.append(contentsOf: "fmt ".utf8)
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Array($0) }) // chunk size
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })  // PCM
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })  // mono
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(44100).littleEndian) { Array($0) }) // sample rate
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(88200).littleEndian) { Array($0) }) // byte rate
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(2).littleEndian) { Array($0) })  // block align
-        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(16).littleEndian) { Array($0) }) // bits per sample
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(16).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(1).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(44100).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt32(88200).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(2).littleEndian) { Array($0) })
+        audioData.append(contentsOf: withUnsafeBytes(of: UInt16(16).littleEndian) { Array($0) })
         audioData.append(contentsOf: "data".utf8)
         audioData.append(contentsOf: withUnsafeBytes(of: dataSize.littleEndian) { Array($0) })
 
-        // Generate beeping pattern: beep for 0.3s, silence for 0.2s
         for i in 0..<numSamples {
             let time = Double(i) / sampleRate
-            let cyclePosition = time.truncatingRemainder(dividingBy: 0.5)
-            let isBeep = cyclePosition < 0.3
+            let cyclePosition = time.truncatingRemainder(dividingBy: cycleDuration)
+            let isBeep = cyclePosition < beepDuration
 
             let amplitude: Double = isBeep ? 0.5 : 0.0
             let sample = Int16(amplitude * sin(2.0 * .pi * frequency * time) * Double(Int16.max))
