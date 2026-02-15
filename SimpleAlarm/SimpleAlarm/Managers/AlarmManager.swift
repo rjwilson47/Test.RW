@@ -195,7 +195,7 @@ class AlarmManager: ObservableObject {
 
     // MARK: - Sound
 
-    private func playAlarmSound(_ sound: AlarmSound = .radar) {
+    private func playAlarmSound(_ sound: AlarmSound = .pulse) {
         configureAudioSession()
 
         // Try to load custom tone, fall back to generated sound
@@ -234,7 +234,7 @@ class AlarmManager: ObservableObject {
         }
     }
 
-    private func playGeneratedTone(sound: AlarmSound = .radar) {
+    private func playGeneratedTone(sound: AlarmSound = .pulse) {
         let sampleRate: Double = 44100
         let duration: Double = 2.0
         let frequency = sound.frequency

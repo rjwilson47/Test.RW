@@ -45,7 +45,7 @@ struct AddEditAlarmView: View {
             _autoStopSeconds = State(initialValue: 20)
             _repeatDays = State(initialValue: [])
             _snoozeEnabled = State(initialValue: true)
-            _sound = State(initialValue: .radar)
+            _sound = State(initialValue: .pulse)
 
         case .edit(let alarm):
             var components = DateComponents()

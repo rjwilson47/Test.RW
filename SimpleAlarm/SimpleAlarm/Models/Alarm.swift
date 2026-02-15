@@ -1,54 +1,54 @@
 import Foundation
 
 enum AlarmSound: String, Codable, CaseIterable, Equatable {
-    case radar = "Radar"
-    case beacon = "Beacon"
-    case chime = "Chime"
-    case signal = "Signal"
-    case classic = "Classic"
-    case gentle = "Gentle"
+    case pulse = "Pulse"
+    case anchor = "Anchor"
+    case sparkle = "Sparkle"
+    case surge = "Surge"
+    case standard = "Standard"
+    case soft = "Soft"
 
     var frequency: Double {
         switch self {
-        case .radar: return 880.0    // A5
-        case .beacon: return 523.25  // C5
-        case .chime: return 1046.5   // C6
-        case .signal: return 659.25  // E5
-        case .classic: return 440.0  // A4
-        case .gentle: return 392.0   // G4
+        case .pulse: return 880.0      // A5
+        case .anchor: return 523.25    // C5
+        case .sparkle: return 1046.5   // C6
+        case .surge: return 659.25     // E5
+        case .standard: return 440.0   // A4
+        case .soft: return 392.0       // G4
         }
     }
 
     var beepDuration: Double {
         switch self {
-        case .radar: return 0.3
-        case .beacon: return 0.5
-        case .chime: return 0.15
-        case .signal: return 0.4
-        case .classic: return 0.25
-        case .gentle: return 0.6
+        case .pulse: return 0.3
+        case .anchor: return 0.5
+        case .sparkle: return 0.15
+        case .surge: return 0.4
+        case .standard: return 0.25
+        case .soft: return 0.6
         }
     }
 
     var silenceDuration: Double {
         switch self {
-        case .radar: return 0.2
-        case .beacon: return 0.3
-        case .chime: return 0.35
-        case .signal: return 0.1
-        case .classic: return 0.25
-        case .gentle: return 0.8
+        case .pulse: return 0.2
+        case .anchor: return 0.3
+        case .sparkle: return 0.35
+        case .surge: return 0.1
+        case .standard: return 0.25
+        case .soft: return 0.8
         }
     }
 
     var iconName: String {
         switch self {
-        case .radar: return "antenna.radiowaves.left.and.right"
-        case .beacon: return "light.beacon.max"
-        case .chime: return "bell"
-        case .signal: return "waveform"
-        case .classic: return "alarm"
-        case .gentle: return "leaf"
+        case .pulse: return "antenna.radiowaves.left.and.right"
+        case .anchor: return "light.beacon.max"
+        case .sparkle: return "bell"
+        case .surge: return "waveform"
+        case .standard: return "alarm"
+        case .soft: return "leaf"
         }
     }
 }
@@ -135,7 +135,7 @@ struct Alarm: Identifiable, Codable, Equatable {
         stopMode: AlarmStopMode = .manual,
         repeatDays: Set<Int> = [],
         snoozeEnabled: Bool = true,
-        sound: AlarmSound = .radar
+        sound: AlarmSound = .pulse
     ) {
         self.id = id
         self.hour = hour
